@@ -58,7 +58,20 @@ services:
       # ECCUBE_ADMIN_PASS: "password"
     networks:
       - backend
-
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    links:
+      - mysql
+    ports:
+      - 4040:80
+    volumes:
+      - ./phpmyadmin/sessions:/sessions
+    networks:
+      - backend
   ### Mailcatcher ##################################
   mailcatcher:
     image: schickling/mailcatcher
